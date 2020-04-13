@@ -15,9 +15,7 @@ class ShoppingListItem extends StatelessWidget {
   final CartChangedCallback onCartChanged;
 
   Color _getColor(BuildContext context) {
-    // The theme depends on the BuildContext because different parts of the tree
-    // can have different themes.  The BuildContext indicates where the build is
-    // taking place and therefore which theme to use.
+    
 
     return inCart ? Colors.black54 : Theme.of(context).primaryColor;
   }
@@ -53,11 +51,7 @@ class ShoppingListItem extends StatelessWidget {
   final List<Product> products=[ ];
    ShoppingList() ;
 
-  // The framework calls createState the first time a widget appears at a given
-  // location in the tree. If the parent rebuilds and uses the same type of
-  // widget (with the same key), the framework re-uses the State object
-  // instead of creating a new State object.
-
+  
   @override
   _ShoppingListState createState() => _ShoppingListState();
 }
@@ -68,10 +62,7 @@ class _ShoppingListState extends State<ShoppingList> {
 
   void _handleCartChanged(Product product, bool inCart) {
     setState(() {
-      // When a user changes what's in the cart, you need to change
-      // _shoppingCart inside a setState call to trigger a rebuild.
-      // The framework then calls build, below,
-      // which updates the visual appearance of the app.
+      
 
       if (!inCart)
         _shoppingCart.add(product);
