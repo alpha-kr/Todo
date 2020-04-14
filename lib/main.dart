@@ -19,6 +19,11 @@ class ShoppingListItem extends StatelessWidget {
 
     return inCart ? Colors.black54 : Theme.of(context).primaryColor;
   }
+   Color _cardColor(BuildContext context) {
+    
+
+    return inCart ? Colors.grey : Colors.yellow[200];
+  }
 
   TextStyle _getTextStyle(BuildContext context) {
     if (!inCart) return null;
@@ -31,10 +36,14 @@ class ShoppingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Card(
+
+      color: _cardColor(context), 
+      child: ListTile(
       onTap: () {
         onCartChanged(product, inCart);
       },
+      contentPadding: EdgeInsets.all(20),
       
       leading: CircleAvatar(
         backgroundColor: _getColor(context),
@@ -42,6 +51,7 @@ class ShoppingListItem extends StatelessWidget {
       ),
       subtitle: Text(product.des),
       title: Text(product.name, style: _getTextStyle(context)),
+    )
     );
   }
 }
