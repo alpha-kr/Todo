@@ -21,7 +21,7 @@ class _DialogoState extends State<Dialogo> {
             controllerBody.clear();
 
             Navigator.of(context).pop(p);}, child: Text("Agregar")),
-        FlatButton(onPressed: null, child: Text("Cancelar"))
+        FlatButton(onPressed: (){Navigator.of(context).pop(null);}, child: Text("Cancelar"))
       ],
     
       
@@ -31,10 +31,10 @@ class _DialogoState extends State<Dialogo> {
       ),
       content: Container( alignment: Alignment.center, width: 200, height: 150 ,child: Column(children: <Widget>[  TextField( decoration: InputDecoration(
         labelText: "Titulo",
-        border: OutlineInputBorder()
+       
       ), controller: controllerTitle,), Spacer(), TextField( decoration: InputDecoration(
         labelText: "Descripcion",
-        border: OutlineInputBorder()),controller: controllerBody,)
+         ),controller: controllerBody,)
          ])
       ));
       

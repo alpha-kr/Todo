@@ -35,6 +35,7 @@ class ShoppingListItem extends StatelessWidget {
       onTap: () {
         onCartChanged(product, inCart);
       },
+      
       leading: CircleAvatar(
         backgroundColor: _getColor(context),
         child: Text(product.name[0]),
@@ -105,6 +106,7 @@ class _ShoppingListState extends State<ShoppingList> {
           return Dismissible( key: UniqueKey(),
           onDismissed: (direccion){
             setState(() {
+               
               widget.products.remove(product);
             });
           },
@@ -132,6 +134,11 @@ class _MyappState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
+       theme: ThemeData(
+         primaryColor: Colors.purple,
+         floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: Colors.purple),
+         buttonColor: Colors.purple,
+       ),
     title: 'Shopping App',
     home: ShoppingList(
  
