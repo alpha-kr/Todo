@@ -120,7 +120,15 @@ class _ShoppingListState extends State<ShoppingList> {
               widget.products.remove(product);
             });
           },
-          
+           background: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Deleting',
+                  style: TextStyle(color: Colors.white),
+                )),
+            color: Colors.red),
            child: ShoppingListItem(
             product: product,
             inCart: _shoppingCart.contains(product),
