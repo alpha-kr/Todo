@@ -4,22 +4,18 @@ import 'package:flutter/material.dart';
 import 'dialogo.dart';
 import 'todo.dart';
 
-typedef void CartChangedCallback(Product product, bool inCart);
+typedef void CartChangedCallback(ToDo ToDo, bool inCart);
 
 class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({this.product, this.inCart, this.onCartChanged ,this.value} )
-      : super(key: ObjectKey(product));
+  ShoppingListItem({this.toDo, this.inCart, this.onCartChanged ,this.value} )
+      : super(key: ObjectKey(ToDo));
 
-  final Product product;
+  final ToDo toDo;
   final String value; 
   final bool inCart;
   final CartChangedCallback onCartChanged;
 
-  Color _getColor(BuildContext context) {
-    
-
-    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
-  }
+ 
    Color _cardColor(BuildContext context) {
     
 
@@ -60,13 +56,13 @@ class ShoppingListItem extends StatelessWidget {
       color: _cardColor(context), 
       child: ListTile(
       onTap: () {
-        onCartChanged(product, inCart);
+        onCartChanged(toDo, inCart);
       },
       contentPadding: EdgeInsets.all(20),
       
-      leading: addIcon(product.tipo),
-      subtitle: Text(product.des),
-      title: Text(product.name, style: _getTextStyle(context)),
+      leading: addIcon(toDo.tipo),
+      subtitle: Text(toDo.des),
+      title: Text(toDo.name, style: _getTextStyle(context)),
     )
     );
   }
@@ -75,7 +71,7 @@ class ShoppingListItem extends StatelessWidget {
  class ShoppingList extends StatefulWidget {
  
 
-  final List<Product> products=[ ];
+  final List<ToDo> toDos=[ ];
    ShoppingList() ;
 
   
@@ -84,22 +80,22 @@ class ShoppingListItem extends StatelessWidget {
 }
 
 class _ShoppingListState extends State<ShoppingList> {
-  Set<Product> _shoppingCart = Set<Product>();
+  Set<ToDo> _shoppingCart = Set<ToDo>();
   
 
-  void _handleCartChanged(Product product, bool inCart) {
+  void _handleCartChanged(ToDo toDo, bool inCart) {
     setState(() {
       
 
       if (!inCart)
-        _shoppingCart.add(product);
+        _shoppingCart.add(toDo);
       else
-        _shoppingCart.remove(product);
+        _shoppingCart.remove(toDo);
     });
   }
 
    _addTodo() async {
-    final todo = await showDialog<Product>(
+    final todo = await showDialog<ToDo>(
       context: context,
       builder: (BuildContext context) {
         return Dialogo();
@@ -107,7 +103,7 @@ class _ShoppingListState extends State<ShoppingList> {
     );
     if (todo!=null) {
       setState(() {
-         this.widget.products.add(todo);
+         this.widget.toDos.add(todo);
       });
      
     }
@@ -128,12 +124,12 @@ class _ShoppingListState extends State<ShoppingList> {
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: widget.products.map((Product product) {
+        children: widget.toDos.map((ToDo toDo) {
           return Dismissible( key: UniqueKey(),
           onDismissed: (direccion){
             setState(() {
                
-              widget.products.remove(product);
+              widget.toDos.remove(toDo);
             });
           },
            background: Container(
@@ -146,8 +142,8 @@ class _ShoppingListState extends State<ShoppingList> {
                 )),
             color: Colors.red),
            child: ShoppingListItem(
-            product: product,
-            inCart: _shoppingCart.contains(product),
+            toDo: toDo,
+            inCart: _shoppingCart.contains(toDo),
             onCartChanged: _handleCartChanged,
           ));
         }).toList(),

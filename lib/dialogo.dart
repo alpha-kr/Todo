@@ -25,7 +25,7 @@ class _DialogoState extends State<Dialogo> {
   Widget build(BuildContext context) {
     return AlertDialog(
       actions: <Widget>[
-        FlatButton(onPressed:(){ var p=Product(name:controllerTitle.value.text, des: controllerBody.value.text,tipo: _dropSelected);
+        FlatButton(onPressed:(){ var p=ToDo(name:controllerTitle.value.text, des: controllerBody.value.text,tipo: _dropSelected);
      controllerTitle.clear();
             controllerBody.clear();
 
@@ -38,7 +38,7 @@ class _DialogoState extends State<Dialogo> {
         'New todo',
         style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0),
       ),
-      content: Container( alignment: Alignment.center, width: 300, height: 200 ,child: Column(children: <Widget>[  TextField( decoration: InputDecoration(
+      content: Container( alignment: Alignment.center, width: 320, height: 200 ,child: Column(children: <Widget>[  TextField( decoration: InputDecoration(
         labelText: "Titulo",
        
       ), controller: controllerTitle,), Spacer(), TextField( decoration: InputDecoration(
