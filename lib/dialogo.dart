@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'todo.dart';
- 
+import 'dropdown.dart';
 class Dialogo extends StatefulWidget {
  
  
@@ -11,12 +11,21 @@ class _DialogoState extends State<Dialogo> {
   
   final controllerTitle = new TextEditingController();
   final controllerBody = new TextEditingController();
+    
+   String _dropSelected = "DEFAULT";
+    
+
+   void se(value) => setState(() {
+              _dropSelected = value;
+              print(_dropSelected);
+            });
+
  
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       actions: <Widget>[
-        FlatButton(onPressed:(){ var p=Product(name:controllerTitle.value.text, des: controllerBody.value.text);
+        FlatButton(onPressed:(){ var p=Product(name:controllerTitle.value.text, des: controllerBody.value.text,tipo: _dropSelected);
      controllerTitle.clear();
             controllerBody.clear();
 
@@ -29,12 +38,13 @@ class _DialogoState extends State<Dialogo> {
         'New todo',
         style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0),
       ),
-      content: Container( alignment: Alignment.center, width: 200, height: 150 ,child: Column(children: <Widget>[  TextField( decoration: InputDecoration(
+      content: Container( alignment: Alignment.center, width: 300, height: 200 ,child: Column(children: <Widget>[  TextField( decoration: InputDecoration(
         labelText: "Titulo",
        
       ), controller: controllerTitle,), Spacer(), TextField( decoration: InputDecoration(
         labelText: "Descripcion",
-         ),controller: controllerBody,)
+         ),controller: controllerBody,),
+        Dropdown( se,_dropSelected )
          ])
       ));
       

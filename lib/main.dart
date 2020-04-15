@@ -7,10 +7,11 @@ import 'todo.dart';
 typedef void CartChangedCallback(Product product, bool inCart);
 
 class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({this.product, this.inCart, this.onCartChanged})
+  ShoppingListItem({this.product, this.inCart, this.onCartChanged ,this.value} )
       : super(key: ObjectKey(product));
 
   final Product product;
+  final String value; 
   final bool inCart;
   final CartChangedCallback onCartChanged;
 
@@ -24,6 +25,24 @@ class ShoppingListItem extends StatelessWidget {
 
     return inCart ? Colors.grey : Colors.yellow[200];
   }
+    Icon addIcon(String value){
+        if (value=="DEFAULT") {
+         return Icon(Icons.check, size: 72.0);
+
+        }
+        if (value=="HOME_WORK") {
+          return Icon(Icons.contacts, size: 72.0);
+
+
+        }
+        if (value=="CALL") {
+           return Icon(Icons.call, size: 72.0);
+        }else{
+          return Icon(Icons.dialpad, size: 72.0);
+        }
+         
+        
+    }
 
   TextStyle _getTextStyle(BuildContext context) {
     if (!inCart) return null;
@@ -45,10 +64,7 @@ class ShoppingListItem extends StatelessWidget {
       },
       contentPadding: EdgeInsets.all(20),
       
-      leading: CircleAvatar(
-        backgroundColor: _getColor(context),
-        child: Text(product.name[0]),
-      ),
+      leading: addIcon(product.tipo),
       subtitle: Text(product.des),
       title: Text(product.name, style: _getTextStyle(context)),
     )
